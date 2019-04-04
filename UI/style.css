@@ -142,7 +142,7 @@
         text-align: center;
     }
     
-    .sign-up button {
+    .sign-up .btn-a {
         background: var(--dark);
         padding: 10px;
         margin: 5px 0 10px 0;
@@ -156,9 +156,10 @@
         transition: background-color 1s ease-out;
     }
     
-    .sign-up button:hover {
+    .sign-up .btn-a:hover {
         background: #fab549;
         color: var(--dark);
+        text-decoration: none;
     }
     
     .sign-up a {
@@ -230,7 +231,7 @@
         color: var(--dark);
     }
     
-    #box1 button {
+    #box1 .btn-a {
         background: #fab549;
         padding: 10px;
         margin: 5px 0 10px 0;
@@ -244,9 +245,10 @@
         text-transform: uppercase;
     }
     
-    #box1 button:hover {
+    #box1 .btn-a:hover {
         background: var(--dark);
         color: #fab549;
+        text-decoration: none;
         transition: background-color 1s ease-out;
     }
     
