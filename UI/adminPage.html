@@ -8,6 +8,34 @@
         <link rel="stylesheet" href="page.css">
     </head>
     <body> 
+        <p class="search">
+            <input type="text number" name="search" placeholder="Enter name or account number">
+            <button class="modal-open"  data-modal="modal4">Search</button>
+            
+            <div class="modal" id="modal4">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Acount Details</h1>
+                    <div class="list">
+                        <ul>
+                            <li>Account Name</li>
+                            <li>Account Number</li>
+                            <li>Account Balance</li>
+                            <li>Account Type</li>
+                            <li>Other Accounts</li>
+                        </ul>
+                        <ul>
+                            <li data-label="account name">Temisan Otokuefor</li>
+                            <li data-label="account number">0023575930</li>
+                            <li data-label="account balance">500,000.00</li>
+                            <li data-label="account type">Savings Account</li>
+                            <li data-label="other account">Current Account</li>
+                        </ul>
+                    </div> 
+                </div>
+            </div> 
+        </p>
+        
         <div class="cover">
             <div class="container">
                 <div class="user-photo mdc-elevation--z3">
