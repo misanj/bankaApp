@@ -73,8 +73,32 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <input type="radio" name="tabs" id="delete-account">
+                        <label for="delete-account">Delete Account</label>
+                                <div class="tab">
+                                    <h1>Delete a Specific Account?</h1>
+                                    <button class="modal-open"  data-modal="modal3">Click Here</button>
+                                    <div class="modal" id="modal3">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
 
-                    </div>
+                                            <label for="name">Account Name</label>
+                                            <input type="text" name="name">
+
+                                            <label for="acct-num">Account Number or ID</label>
+                                            <input type="text" name="acct-num">
+                                        
+                                            <label for="admin-staff-id">Email Address</label>
+                                            <input type="email" name="email-address">
+                                        
+                                            <button>Delete Account</button>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                        </div>
                 </section>    
             </div> 
         </div>                       
