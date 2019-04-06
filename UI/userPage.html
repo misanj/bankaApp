@@ -66,59 +66,89 @@
                     <input type="radio" name="tabs" id="buy-airtime">
                     <label for="buy-airtime">Buy Airtime</label>
                     <div class="tab">
-                          <h1>Buy Airtime?</h1>
-                          <button class="modal-open"  data-modal="modal2">Click Here</button>
-                          <div class="modal" id="modal2">
-  
-                              <!-- Modal content -->
-                              <div class="modal-content">
-                                  <span class="close">&times;</span>
-                                  <label for="network-name">Enter Network</label>
-                                  <input type="text" name="network-name">
-                          
-                                  <label for="mobile-num">Mobile Number</label>
-                                  <input type="text" name="mobile-num">
-
-                                  <label for="acc-password">Enter Password</label>
-                                  <input type="password" name="acct-password">
-                      
-                                  <button>Pay</button>
-                              </div>
-                          </div>
+                        <h1>Buy Airtime?</h1>
+                        <button class="modal-open"  data-modal="modal2">Click Here</button>
+                        <div class="modal" id="modal2">
+                            
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <label for="network-name">Enter Network</label>
+                                <input type="text" name="network-name">
+                                
+                                <label for="mobile-num">Mobile Number</label>
+                                <input type="text" name="mobile-num">
+                                
+                                <label for="acc-password">Enter Password</label>
+                                <input type="password" name="acct-password">
+                                
+                                <button>Pay</button>
+                            </div>
+                        </div>  
                     </div> 
-                </div>
+                    <input type="radio" name="tabs" id="view-account">
+                    <label for="view-account">View Account</label>
+                    <div class="tab">
+                        <h1>All Accounts</h1>
+                        <div class="list">
+                            <ul>
+                                <li>S/N</li>
+                                <li>Account Name</li>
+                                <li>Account Number</li>
+                                <li>Account Type</li>
+                                <li>Account Balabce</li>
+                            </ul>
+                            <ul>
+                                <li data-label="s/n">1</li>
+                                <li data-label="account name">Temisan Otokuefor</li>
+                                <li data-label="account number">0023575930</li>
+                                <li data-label="account type">Savings Account</li>
+                                <li data-label="account balance">500,000.00</li>
+                            </ul>
+                            
+                            <ul>
+                                <li data-label="s/n">2</li>
+                                <li data-label="account name">Temisan Otokuefor</li>
+                                <li data-label="account number">0024585104</li>
+                                <li data-label="account type">Domicilary Account</li>
+                                <li data-label="account balance">50,000.00</li> 
+                            </ul>
+                        </div> 
+                
+                    </div> 
+                </div>      
             </section>
-
-            <section class="notif"> 
-                <h1>Recent Notifications</h1>     
-                <div class="list">
-                    <ul>
-                        <li>Date</li>
-                        <li>Description</li>
-                        <li>Amount</li>
-                    </ul>
-                    <ul>
-                        <li data-label="date">dd/mm/yy</li>
-                        <li data-label="Disription">Sms charge for March 2019</li>
-                        <li id="debit"data-label="amount">#52,00</li>
-                    </ul>
-                    
-                    <ul>
-                        <li data-label="date">dd/mm/yy</li>
-                        <li data-label="Disription">Your Account was Credited with the sum of</li>
-                        <li id="credit" data-label="amount">#20,000</li>  
-                    </ul>
-                    
-                    <ul>
-                        <li data-label="date">dd/mm/yy</li>
-                        <li data-label="Disription">Sms charge for March 2019</li>
-                        <li id="debit" data-label="amount">#52,00</li>
-                    </ul>
-                </div> 
-                <button class="sec">Load More</button>
-            </section>     
-        </div> 
-    </div>           
+                
+                <section class="notif"> 
+                    <h1>Recent Notifications</h1>     
+                    <div class="list">
+                        <ul>
+                            <li>Date</li>
+                            <li>Description</li>
+                            <li>Amount</li>
+                        </ul>
+                        <ul>
+                            <li data-label="date">dd/mm/yy</li>
+                            <li data-label="Disription">Sms charge for March 2019</li>
+                            <li id="debit"data-label="amount">#52,00</li>
+                        </ul>
+                        
+                        <ul>
+                            <li data-label="date">dd/mm/yy</li>
+                            <li data-label="Disription">Your Account was Credited with the sum of</li>
+                            <li id="credit" data-label="amount">#20,000</li>  
+                        </ul>
+                        
+                        <ul>
+                            <li data-label="date">dd/mm/yy</li>
+                            <li data-label="Disription">Sms charge for March 2019</li>
+                            <li id="debit" data-label="amount">#52,00</li>
+                        </ul>
+                    </div> 
+                    <button class="sec">Load More</button>
+                </section>     
+            </div> 
+        </div>           
         <footer>
             <p>Banka App &copy; 2019</p>
         </footer>
