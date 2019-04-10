@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import users from '../models/users';
 import Auth from '../utils/authenticate';
 
@@ -38,6 +39,37 @@ class UserController {
         firstName,
         lastName,
         email,
+      },
+    });
+  }
+
+  static signin(req, res) {
+    const { email, password } = req.body;
+    const user = users.find(item => item.email === email);
+
+    if (user === undefined) {
+      return res.status(401).json({
+        status: res.statusCode,
+        error: 'Authentication error',
+      });
+    }
+
+    if (!Auth.verifyPassword(password, user.password)) {
+      return res.status(401).json({
+        status: res.statusCode,
+        error: 'Authentication error',
+      });
+    }
+
+    const token = Auth.generateToken(user);
+    return res.status(200).json({
+      status: res.statusCode,
+      data: {
+        token,
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
       },
     });
   }
