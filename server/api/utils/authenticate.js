@@ -15,6 +15,10 @@ class Auth {
     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
     return token;
   }
+
+  static verifyPassword(plainTextPassword, hashedPassword) {
+    return bcrypt.compareSync(plainTextPassword, hashedPassword);
+  }
 }
 
 export default Auth;
