@@ -1,5 +1,7 @@
 import express from 'express';
 import UserController from '../controllers/userController';
+import AcctController from '../controllers/acctController';
+import Verification from '../middlewares/verification';
 
 const router = express.Router();
 
@@ -9,5 +11,6 @@ router.get('/', (req, res) => {
 
 router.post('/auth/signup', UserController.signup);
 router.post('/auth/signin', UserController.signin);
+router.post('/accounts', Verification.user, AcctController.createAccount);
 
 export default router;

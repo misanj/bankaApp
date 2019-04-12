@@ -19,6 +19,11 @@ class Auth {
   static verifyPassword(plainTextPassword, hashedPassword) {
     return bcrypt.compareSync(plainTextPassword, hashedPassword);
   }
+
+  static verifyToken(token) {
+    const decoded = jwt.verify(token, secret);
+    return decoded;
+  }
 }
 
 export default Auth;
