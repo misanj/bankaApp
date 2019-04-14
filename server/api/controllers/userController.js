@@ -53,15 +53,21 @@ class UserController {
         error: 'Authentication error',
       });
     }
-
+    // console.log(user);
     if (!Auth.verifyPassword(password, user.password)) {
       return res.status(401).json({
         status: res.statusCode,
         error: 'Authentication error',
       });
     }
-
-    const token = Auth.generateToken(user);
+    const token = Auth.generateToken({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      type: user.type,
+      isAdmin: user.isAdmin,
+    });
     return res.status(200).json({
       status: res.statusCode,
       data: {

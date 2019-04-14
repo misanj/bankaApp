@@ -28,7 +28,14 @@ const users = [
     password: Auth.hashPassword('password'),
     type: 'client',
   },
-
+  {
+    id: 4,
+    firstName: 'john',
+    lastName: 'brad',
+    email: 'brad@banka.com',
+    password: Auth.hashPassword('password'),
+    type: 'client',
+  },
 
 ];
 
