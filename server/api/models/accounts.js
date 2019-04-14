@@ -1,16 +1,16 @@
 const accounts = [
   {
     id: 1,
-    accountNumber: 29864318,
+    accountNumber: 4530797010,
     createdOn: new Date(),
     owner: 1,
     type: 'savings',
     status: 'active',
-    balance: 56.036,
+    balance: 0.1001,
   },
   {
     id: 2,
-    accountNumber: 29864319,
+    accountNumber: 2986431920,
     createdOn: new Date(),
     owner: 2,
     type: 'current',
@@ -19,7 +19,7 @@ const accounts = [
   },
   {
     id: 3,
-    accountNumber: 298643120,
+    accountNumber: 29864312021,
     createdOn: new Date(),
     owner: 3,
     type: 'savings',

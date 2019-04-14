@@ -37,3 +37,31 @@ describe('create account tests', () => {
       });
   });
 });
+describe('Account Status Tests', () => {
+  it('should successfuly update account status', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'admin@banka.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data.token}`;
+        chai.request(app)
+          .patch('/api/v1/accounts/4530797010')
+          .set('Authorization', token)
+          .send({
+            status: 'active',
+          })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('object');
+            res.body.data.should.have.property('accountNumber');
+            res.body.data.should.have.property('status');
+            done();
+          });
+      });
+  });
+});

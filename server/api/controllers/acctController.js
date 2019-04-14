@@ -1,10 +1,11 @@
+
 /* eslint-disable class-methods-use-this */
-import accounts from '../models/accounts';
+import accounts from '../models/Accounts';
 
 class AccoountController {
   static createAccount(req, res) {
     const { type } = req.body;
-    const genAccountNo = Math.floor((Math.random() * 1000000000) + 1);
+    const genAccountNo = Math.floor(Math.random() * 10000000000);
     const initialBalance = parseFloat('0.1001');
     const account = {
       id: accounts.length + 1,
@@ -26,6 +27,27 @@ class AccoountController {
         type: account.type,
         openingBalance: account.balance,
       },
+    });
+  }
+
+  // ACTIVATE AND DEACTIVATE ACCOUNT
+  static accountStatus(req, res) {
+    const { status } = req.body;
+    const { accountNumber } = req.params;
+    const validAccount = accounts
+      .find(eachAccount => eachAccount.accountNumber === parseInt(accountNumber, 10));
+    if (validAccount) {
+      return res.status(200).json({
+        status: res.statusCode,
+        data: {
+          accountNumber,
+          status,
+        },
+      });
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: `Account ${accountNumber} does not exist`,
     });
   }
 }
