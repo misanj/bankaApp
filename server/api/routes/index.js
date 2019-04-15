@@ -13,5 +13,6 @@ router.post('/auth/signup', UserController.signup);
 router.post('/auth/signin', UserController.signin);
 router.post('/accounts', Verification.user, AcctController.createAccount);
 router.patch('/accounts/:accountNumber', Verification.admin, AcctController.accountStatus);
+router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
 
 export default router;

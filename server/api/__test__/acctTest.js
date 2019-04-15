@@ -65,3 +65,26 @@ describe('Account Status Tests', () => {
       });
   });
 });
+describe('Delete Account Tests', () => {
+  it('should delete account successfully', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'admin@banka.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data.token}`;
+        chai.request(app)
+          .delete('/api/v1/accounts/4530797010')
+          .set('Authorization', token)
+
+          .end((err, res) => {
+            res.body.should.be.a('object');
+            res.body.should.have.status(200);
+            res.body.should.have.property('message');
+            done();
+          });
+      });
+  });
+});
