@@ -2,6 +2,7 @@ import express from 'express';
 import UserController from '../controllers/userController';
 import AcctController from '../controllers/acctController';
 import Verification from '../middlewares/verification';
+import TransactionController from '../controllers/transactionCont';
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.post('/auth/signin', UserController.signin);
 router.post('/accounts', Verification.user, AcctController.createAccount);
 router.patch('/accounts/:accountNumber', Verification.admin, AcctController.accountStatus);
 router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
+router.post('/transactions/:accountNumber/credit', Verification.staff, TransactionController.creditAccount);
 
 export default router;

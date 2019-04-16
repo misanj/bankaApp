@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => res.status(200).json({ message: 'Welcome to banka api' }));
 app.use('/api/v1', router);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5200;
 
 app.listen(port, log(`listening on port: ${port}`));
 
