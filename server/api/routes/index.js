@@ -16,5 +16,6 @@ router.post('/accounts', Verification.user, AcctController.createAccount);
 router.patch('/accounts/:accountNumber', Verification.admin, AcctController.accountStatus);
 router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
 router.post('/transactions/:accountNumber/credit', Verification.staff, TransactionController.creditAccount);
+router.post('/transactions/:accountNumber/debit', Verification.staff, TransactionController.debitAccount);
 
 export default router;
