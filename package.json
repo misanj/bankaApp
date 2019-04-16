@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha server/api/__test__/* --require @babel/register --exit",
+    "test": "mocha server/api/__test__/*.js --require @babel/register --exit",
     "start": "node ./build/app.js",
     "dev": "set DEBUG= dev && nodemon --exec babel-node server/app.js",
     "build": "rm -rf build && mkdir build && babel -d ./build ./server",

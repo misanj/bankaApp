@@ -66,11 +66,11 @@ class AccoountController {
       if (account.accountNumber === parseInt(accountNumber, 10)) {
         const indexNumber = accounts.indexOf(account);
         accounts.splice(indexNumber, 1);
+        res.status(200).json({
+          status: res.statusCode,
+          message: 'Account successfully deleted!',
+        });
       }
-      return res.status(200).json({
-        status: res.statusCode,
-        message: 'Account successfully deleted!',
-      });
     });
   }
 }
