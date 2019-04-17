@@ -1,4 +1,4 @@
-import transactions from '../models/transactions';
+import transactions from '../models/transactionsdb';
 import accounts from '../models/accounts';
 
 export default class TransactionController {
