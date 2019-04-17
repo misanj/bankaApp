@@ -1,6 +1,6 @@
 
 /* eslint-disable class-methods-use-this */
-import accounts from '../models/Accounts';
+import accounts from '../models/accounts';
 
 class AccoountController {
   static createAccount(req, res) {
