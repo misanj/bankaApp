@@ -3,11 +3,26 @@
     --dark: #203f7d;
     --light: #fff;
     --shadow: 0 1px 5px rgb(226, 224, 224);
+    }  
+    
+    body {
+        margin: 0;
     }
-      
-    .container {
+
+    header .container {
         background: var(--dark);
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
+
+    @media (max-width: 600px) {
+        header .container{
+            flex-direction: column;
+        }
+    }
+
     
     ul {
         margin: 0;
