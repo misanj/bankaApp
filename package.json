@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha server/api/__test__/*.js --require @babel/register --exit",
+    "test": "nyc --reporter=text mocha server/api/__test__/*.js --require @babel/register --exit",
     "start": "node ./build/app.js",
     "dev": "set DEBUG= dev && nodemon --exec babel-node server/app.js",
     "build": "rm -rf build && mkdir build && babel -d ./build ./server",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "repository": {
     "type": "git",
@@ -43,9 +45,12 @@
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
+    "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "mocha": "^6.1.1"
+    "mocha": "^6.1.1",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^14.0.0"
   }
 }

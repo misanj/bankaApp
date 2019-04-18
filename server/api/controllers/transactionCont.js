@@ -1,5 +1,5 @@
-import transactions from '../models/Transactions';
-import accounts from '../models/Accounts';
+import transactions from '../models/transactionsdb';
+import accounts from '../models/accounts';
 
 export default class TransactionController {
   static creditAccount(req, res) {
