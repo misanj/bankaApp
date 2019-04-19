@@ -196,13 +196,7 @@ margin: 0;
   padding: 10px;
   border: 1px solid #fff;
   width: 40%;
-  min-width: 300px;
-  max-width: 700px;
-}
-@media (max-width: 600px) {
-  .modal-content{
-  width: 80%;
-}
+
 }
 
 .list li {
@@ -272,25 +266,121 @@ margin: 0;
   border-bottom: 2px #ddd solid;
 }
 
-#modal8,
-#modal9,
-#modal10 data-label {
-  float: right;
-}
-
-#modal8 li,
-#modal9 li,
-#modal10 li{
-  display: block;
-  color: #ddd;
-  list-style: none;
-}
-
 #modal8 ul,
 #modal9 ul,
 #modal10 ul{
   float: left;
 }
+
+#modal8 li,
+#modal9 li,
+#modal10 li{
+  color: #ddd;
+}
+
+
+@media screen and (max-width:1300px) {
+  .modal-content{
+  width: 40%;
+  }
+
+  .modal a{
+  font-size: 30px;
+  font-weight: bold;
+  color: #ddd;
+  display: inline-flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-align: center;
+  text-decoration: none;
+    }
+} 
+
+@media screen and (max-width:1000px) {
+  #modal8 ul,
+  #modal9 ul,
+  #modal10 ul{
+    float: left;
+    }
+
+  #modal8 li,
+  #modal9 li,
+  #modal10 li{
+  color: #ddd;
+    }
+
+}
+
+@media screen and (max-width:792px) {
+  .modal-content{
+  width: 50%;
+  }
+
+  .modal a{
+  font-size: 30px;
+  font-weight: bold;
+  color: #ddd;
+  display: inline-flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  text-align: center;
+  text-decoration: none;
+    }
+
+  #modal8 ul,
+  #modal9 ul,
+  #modal10 ul{
+    float: left;
+    }
+
+  #modal8 li,
+  #modal9 li,
+  #modal10 li{
+  color: #ddd;
+    }
+}  
+
+@media screen and (max-width:610px) {
+  .modal-content{
+  width: 60%;
+  }
+
+  .modal a{
+  font-size: 30px;
+  font-weight: bold;
+  color: #ddd;
+  display: inline-flex;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  text-align: center;
+  text-decoration: none;
+    }
+
+    #modal8 ul,
+  #modal9 ul,
+  #modal10 ul{
+    float: left;
+    }
+
+  #modal8 li,
+  #modal9 li,
+  #modal10 li{
+  color: #ddd;
+    }
+}  
+
+@media screen and (max-width:300px) {
+  .modal-content{
+  width: 80%;
+  }
+}  
+
 
 @keyframes modal-open {
   from{
