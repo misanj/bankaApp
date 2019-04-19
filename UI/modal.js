@@ -1,22 +1,27 @@
-let modalBtns = document.querySelectorAll('.modal-open');
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-multi-assign */
+/* eslint-disable no-undef */
+/* eslint-disable func-names */
+const modalBtns = document.querySelectorAll('.modal-open');
 
-modalBtns.forEach (function(btn){
-    btn.onclick = function () {
-        let modal = btn.getAttribute('data-modal');
-        document.getElementById(modal).style.display = 'block';
-    };
+modalBtns.forEach((btn) => {
+  btn.onclick = function () {
+    const modal = btn.getAttribute('data-modal');
+    document.getElementById(modal).style.display = 'flex';
+  };
 });
 
-let closeBtns = document.querySelectorAll('.close');
+const closeBtns = document.querySelectorAll('.close');
 
-closeBtns.forEach (function(btn){
-    btn.onclick = function () {
-        let modal = btn.closest('.modal').style.display = 'none';
-    };
+closeBtns.forEach((btn) => {
+  btn.onclick = function () {
+    const modal = btn.closest('.modal').style.display = 'none';
+  };
 });
 
-window.onclick = function(e){
-    if(e.target.className === 'modal'){
-        e.target.style.display = 'none';
-    }
-} 
+window.onclick = function (e) {
+  if (e.target.className === 'modal') {
+    e.target.style.display = 'none';
+  }
+};
