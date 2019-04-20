@@ -10,7 +10,8 @@
     "build": "rm -rf build && mkdir build && babel -d ./build ./server",
     "heroku-postbuild": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "clean-db": "set DEBUG= dev && babel-node server/api/database/createTables.js"
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,8 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "pg": "^7.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
