@@ -1,8 +1,9 @@
+/* eslint-disable import/named */
 import express from 'express';
 import UserController from '../controllers/userController';
 import AcctController from '../controllers/acctController';
 import Verification from '../middlewares/verification';
-import validateUser from '../middlewares/validation';
+import { validateUser, signInuser } from '../middlewares/validation';
 import TransactionController from '../controllers/transactionCont';
 
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/auth/signup', validateUser, UserController.signUp);
-// router.post('/auth/signin', UserController.signin);
+router.post('/auth/signin', signInuser, UserController.signIn);
 router.post('/accounts', Verification.user, AcctController.createAccount);
 router.patch('/accounts/:accountNumber', Verification.admin, AcctController.accountStatus);
 router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
