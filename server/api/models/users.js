@@ -1,42 +1,29 @@
 import Auth from '../utils/authenticate';
+import db from '../database/db';
 
-const users = [
-  {
-    id: 1,
-    firstName: 'john',
-    lastName: 'doe',
-    email: 'admin@banka.com',
-    password: Auth.hashPassword('password'),
-    type: 'staff',
-    isAdmin: true,
-  },
-  {
-    id: 2,
-    firstName: 'temisan',
-    lastName: 'otokuefor',
-    email: 'staff@banka.com',
-    password: Auth.hashPassword('password'),
-    type: 'staff',
-    isAdmin: false,
-  },
+/**
+ * @exports
+ * @class User
+ */
+class User {
+  /**
+   * @param {*} data
+   * @returns { object } user object
+   */
+  // eslint-disable-next-line class-methods-use-this
+  create(data) {
+    const queryText = `INSERT INTO users (firstname, lastname, email, password) 
+    VALUES($1, $2, $3, $4)
+    RETURNING *`;
 
-  {
-    id: 3,
-    firstName: 'aboki',
-    lastName: 'james',
-    email: 'client@banka.com',
-    password: Auth.hashPassword('password'),
-    type: 'client',
-  },
-  {
-    id: 4,
-    firstName: 'john',
-    lastName: 'brad',
-    email: 'brad@banka.com',
-    password: Auth.hashPassword('password'),
-    type: 'client',
-  },
+    const {
+      firstName, lastName, email, password,
+    } = data;
 
-];
-
-export default users;
+    const hashedPassword = Auth.hashPassword(password);
+    const values = [firstName, lastName, email, hashedPassword];
+    const result = db.query(queryText, values);
+    return result;
+  }
+}
+export default new User();

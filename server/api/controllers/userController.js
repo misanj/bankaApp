@@ -3,82 +3,42 @@ import users from '../models/users';
 import Auth from '../utils/authenticate';
 
 class UserController {
-  static signup(req, res) {
-    const {
-      firstName, lastName, email, password,
-    } = req.body;
-    let emailExists = false;
-
-    users.forEach((user) => {
-      if (email === user.email) {
-        emailExists = true;
+  // /**
+  // * @method signUp
+  // * @description Adds a user to the database
+  // * @param {object} req - The Request Object
+  // * @param {object} res - The Response Object
+  // * @returns {object} JSON API Response
+  // */
+  async signUp(req, res) {
+    try {
+      const result = await users.create(req.body);
+      const user = result.rows[0];
+      //
+      const token = Auth.generateToken({ id: user.id, email: user.email });
+      return res.status(201).json({
+        status: res.statusCode,
+        data: [{
+          token,
+          id: user.id,
+          firstName: user.firstname,
+          lastName: user.lastname,
+          email: user.email,
+        }],
+      });
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.status(422).json({
+          status: res.statusCode,
+          error: 'email already exist, please choose another one',
+        });
       }
-    });
-    if (emailExists) {
-      return res.status(401).json({
+      return res.status(400).json({
         status: res.statusCode,
-        error: 'email already exists, please choose another',
+        error: error.detail,
       });
     }
-
-    const user = {
-      id: users.length + 1,
-      email,
-      firstName,
-      lastName,
-      password: Auth.hashPassword(password),
-      type: 'client',
-    };
-    users.push(user);
-    const token = Auth.generateToken({ id: user.id, email, type: user.type });
-    return res.status(201).json({
-      status: res.statusCode,
-      data: {
-        token,
-        id: user.id,
-        firstName,
-        lastName,
-        email,
-      },
-    });
-  }
-
-  static signin(req, res) {
-    const { email, password } = req.body;
-    const user = users.find(item => item.email === email);
-
-    if (user === undefined) {
-      return res.status(401).json({
-        status: res.statusCode,
-        error: 'Authentication error',
-      });
-    }
-    // console.log(user);
-    if (!Auth.verifyPassword(password, user.password)) {
-      return res.status(401).json({
-        status: res.statusCode,
-        error: 'Authentication error',
-      });
-    }
-    const token = Auth.generateToken({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      type: user.type,
-      isAdmin: user.isAdmin,
-    });
-    return res.status(200).json({
-      status: res.statusCode,
-      data: {
-        token,
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-      },
-    });
   }
 }
-
-export default UserController;
+const userController = new UserController();
+export default userController;
