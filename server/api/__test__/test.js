@@ -162,3 +162,103 @@ describe('user sign up tests', () => {
       });
   });
 });
+describe('user sign in tests', () => {
+  it('should not sign in user if email is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'test',
+        lastName: 'user',
+        email: '',
+        password: 'pA55w0rd',
+      })
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should not sign in user if email is invalid', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'test',
+        lastName: 'user',
+        email: 'test@com',
+        password: 'pA55w0rd',
+      })
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should not sign in user if password is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'test',
+        lastName: 'user',
+        email: 'test@com',
+        password: '',
+      })
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should successfully sign in a user', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'femi2@gmail.com',
+        password: 'pA55w0rd',
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.should.have.property('data');
+        res.body.data.should.be.a('array');
+        res.body.data[0].should.have.property('token');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('firstName');
+        res.body.data[0].should.have.property('lastName');
+        res.body.data[0].should.have.property('email');
+        done();
+      });
+  });
+  it('should not sign in user if email does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'fa@testmail.com',
+        password: 'pA55w0rd',
+      })
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status');
+        res.body.should.have.property('error');
+        res.body.error.should.equal('Authentication Error');
+        done();
+      });
+  });
+  it('should not sign in user if password does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'femi2@gmail.com',
+        password: 'pA5',
+      })
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status');
+        res.body.should.have.property('error');
+        res.body.error.should.equal('Authentication Error');
+        done();
+      });
+  });
+});

@@ -25,5 +25,12 @@ class User {
     const result = db.query(queryText, values);
     return result;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  find(email) {
+    const query = 'SELECT * FROM users WHERE email=$1';
+    const result = db.query(query, [email]);
+    return result;
+  }
 }
 export default new User();

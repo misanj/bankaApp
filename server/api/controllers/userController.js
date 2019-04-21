@@ -39,6 +39,36 @@ class UserController {
       });
     }
   }
+
+  async signIn(req, res) {
+    const {
+      email,
+      password,
+    } = req.body;
+
+    const result = await users.find(email);
+
+    if (result.rows < 1 || !Auth.verifyPassword(password, result.rows[0].password)) {
+      return res.status(401).json({
+        status: res.statusCode,
+        error: 'Authentication Error',
+      });
+    }
+
+    const user = { ...result.rows[0] };
+    const token = Auth.generateToken(user);
+
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        token,
+        id: user.id,
+        firstName: user.firstname,
+        lastName: user.lastname,
+        email: user.email,
+      }],
+    });
+  }
 }
 const userController = new UserController();
 export default userController;

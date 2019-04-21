@@ -23,4 +23,25 @@ const validateUser = [
     return next();
   },
 ];
-export default validateUser;
+
+const signInuser = [
+  check('email').isEmail().trim().withMessage('Input a valid email address'),
+  check('email').not().isEmpty().withMessage('Input email address'),
+  check('password').not().isEmpty().withMessage('Input password'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const errMessages = [];
+    if (!errors.isEmpty()) {
+      errors.array().forEach((err) => {
+        errMessages.push(err.msg);
+      });
+      return res.status(401).json({
+        status: 401,
+        error: errMessages,
+      });
+    }
+    return next();
+  },
+];
+
+export { validateUser, signInuser };
