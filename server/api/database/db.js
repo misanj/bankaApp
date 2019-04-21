@@ -13,12 +13,12 @@ const pool = new Pool({
 
 pool.on('connect', () => log('connected to the db'));
 
-const query = (queryString, params) => {
-  pool.query(queryString, params)
-    .then(res => log(res))
-    .catch(err => log(err));
-};
+// const query = (queryString, params) => {
+//   pool.query(queryString, params)
+//     .then(res => log(res))
+//     .catch(err => log(err));
+// };
 
 pool.on('remove', () => log('connection terminated'));
 
-export default query;
+export default pool;
