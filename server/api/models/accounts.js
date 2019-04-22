@@ -1,32 +1,25 @@
-const accounts = [
-  {
-    id: 1,
-    accountNumber: 4530797010,
-    createdOn: new Date(),
-    owner: 1,
-    type: 'savings',
-    status: 'active',
-    balance: 0.1001,
-  },
-  {
-    id: 2,
-    accountNumber: 2986431920,
-    createdOn: new Date(),
-    owner: 2,
-    type: 'current',
-    status: 'draft',
-    balance: 10.567,
-  },
-  {
-    id: 3,
-    accountNumber: 29864312021,
-    createdOn: new Date(),
-    owner: 3,
-    type: 'savings',
-    status: 'dormant',
-    balance: 594.25,
-  },
+/* eslint-disable class-methods-use-this */
+import moment from 'moment';
+import AcctNumber from '../utils/accountNumber';
+import db from '../database/db';
 
-];
+class Account {
+  create(data, req) {
+    const queryText = `INSERT INTO accounts(account_number, createdon, client_id,
+        type) 
+        VALUES ($1, $2, $3, $4) 
+        RETURNING account_number, type, balance;`;
 
-export default accounts;
+    const values = [
+      AcctNumber.generateAcctNum(),
+      moment(new Date()),
+      req.user.id,
+      data,
+    ];
+
+    const results = db.query(queryText, values);
+    return results;
+  }
+}
+const account = new Account();
+export default account;

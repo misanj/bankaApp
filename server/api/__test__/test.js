@@ -262,3 +262,82 @@ describe('user sign in tests', () => {
       });
   });
 });
+
+describe('create account tests', () => {
+  it('should not create a bank account if type is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'femi2@gmail.com',
+        password: 'pA55w0rd',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data.token}`;
+        chai.request(app)
+          .post('/api/v1/accounts')
+          .set('Authorization', token)
+          .send({
+            type: '',
+          })
+          .end((err, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('error');
+            done();
+          });
+      });
+  });
+
+  it('should not create a bank account if type is not alphabets', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'femi2@gmail.com',
+        password: 'pA55w0rd',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data.token}`;
+        chai.request(app)
+          .post('/api/v1/accounts')
+          .set('Authorization', token)
+          .send({
+            type: '225savig',
+          })
+          .end((err, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('error');
+            done();
+          });
+      });
+  });
+
+  it('should successfully create a bank account', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'femi2@gmail.com',
+        password: 'pA55w0rd',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .post('/api/v1/accounts')
+          .set('Authorization', token)
+          .send({
+            type: 'savings',
+          })
+          .end((err, res) => {
+            res.should.have.status(201);
+            res.body.should.be.a('object');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('array');
+            res.body.data[0].should.have.property('accountNumber');
+            res.body.data[0].should.have.property('firstName');
+            res.body.data[0].should.have.property('lastName');
+            res.body.data[0].should.have.property('email');
+            res.body.data[0].should.have.property('type');
+            res.body.data[0].should.have.property('openingBalance');
+            done();
+          });
+      });
+  });
+});

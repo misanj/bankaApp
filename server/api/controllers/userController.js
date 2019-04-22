@@ -3,13 +3,6 @@ import users from '../models/users';
 import Auth from '../utils/authenticate';
 
 class UserController {
-  // /**
-  // * @method signUp
-  // * @description Adds a user to the database
-  // * @param {object} req - The Request Object
-  // * @param {object} res - The Response Object
-  // * @returns {object} JSON API Response
-  // */
   async signUp(req, res) {
     try {
       const result = await users.create(req.body);
