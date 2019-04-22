@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -7,23 +8,25 @@ dotenv.config();
 const secret = process.env.SECRET;
 
 class Auth {
-  static hashPassword(password) {
+  hashPassword(password) {
     return bcrypt.hashSync(password, 10);
   }
 
-  static generateToken(payload) {
+  generateToken(payload) {
     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
     return token;
   }
 
-  static verifyPassword(plainTextPassword, hashedPassword) {
+  verifyPassword(plainTextPassword, hashedPassword) {
     return bcrypt.compareSync(plainTextPassword, hashedPassword);
   }
 
-  static verifyToken(token) {
+  verifyToken(token) {
     const decoded = jwt.verify(token, secret);
     return decoded;
   }
 }
 
-export default Auth;
+const auth = new Auth();
+
+export default auth;

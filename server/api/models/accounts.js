@@ -17,8 +17,15 @@ class Account {
       data,
     ];
 
-    const results = db.query(queryText, values);
-    return results;
+    const result = db.query(queryText, values);
+    return result;
+  }
+
+  async updateAcctStatus(accountNumber, status) {
+    const query = 'UPDATE accounts SET status = $1 WHERE account_number = $2 RETURNING *;';
+
+    const result = db.query(query, [status, accountNumber]);
+    return result;
   }
 }
 const account = new Account();

@@ -1,7 +1,8 @@
+/* eslint-disable class-methods-use-this */
 import Auth from '../utils/authenticate';
 
 class Verification {
-  static user(req, res, next) {
+  user(req, res, next) {
     try {
       const token = req.headers.authorization.split(' ')[1];
       const decoded = Auth.verifyToken(token);
@@ -15,7 +16,7 @@ class Verification {
     }
   }
 
-  static staff(req, res, next) {
+  staff(req, res, next) {
     try {
       const token = req.headers.authorization.split(' ')[1];
       const decoded = Auth.verifyToken(token);
@@ -30,17 +31,17 @@ class Verification {
     } catch (error) {
       return res.status(401).json({
         status: res.statusCode,
-        error: 'Authentication failed',
+        error: 'Authentication Failed',
       });
     }
   }
 
-  static admin(req, res, next) {
+  admin(req, res, next) {
     try {
       const token = req.headers.authorization.split(' ')[1];
       const decoded = Auth.verifyToken(token);
       req.user = decoded;
-      if (!req.user.isAdmin) {
+      if (!req.user.isadmin) {
         return res.status(403).send({
           status: res.statusCode,
           error: 'The endpoint you are requesting is forbidden',
@@ -50,9 +51,11 @@ class Verification {
     } catch (error) {
       return res.status(401).json({
         status: res.statusCode,
-        error: 'Authentication failed',
+        error: 'Authentication Failed',
       });
     }
   }
 }
-export default Verification;
+const verification = new Verification();
+
+export default verification;
