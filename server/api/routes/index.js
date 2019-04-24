@@ -18,7 +18,7 @@ router.post('/auth/signup', validateUser, UserController.signUp);
 router.post('/auth/signin', signInuser, UserController.signIn);
 router.post('/accounts', validateCreate, Verification.user, AcctController.createAccount);
 router.patch('/accounts/:accountNumber', Verification.admin, AcctController.activateDeactivate);
-// router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
+router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
 // router.post('/transactions/:accountNumber/credit', Verification.staff, TransactionController.creditAccount);
 // router.post('/transactions/:accountNumber/debit', Verification.staff, TransactionController.debitAccount);
 export default router;
