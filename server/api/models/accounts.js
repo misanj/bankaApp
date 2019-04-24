@@ -27,6 +27,12 @@ class Account {
     const result = db.query(query, [status, accountNumber]);
     return result;
   }
+
+  delete(accountNumber) {
+    const query = 'DELETE FROM accounts WHERE "account_number" = $1';
+    const result = db.query(query, [accountNumber]);
+    return result;
+  }
 }
 const account = new Account();
 export default account;

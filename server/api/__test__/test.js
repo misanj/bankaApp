@@ -343,130 +343,128 @@ describe('create account tests', () => {
       });
   });
 });
-// describe('Activate and Deactivate account test', () => {
-//   it('should not be able to change account status if user is not admin', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/auth/signin')
-//       .send({
-//         email: 'temisan@gmail.com',
-//         password: 'devcrush',
-//       })
-//       .end((error, response) => {
-//         const token = `Bearer ${response.body.data.token}`;
-//         chai.request(app)
-//           .patch('/api/v1/accounts/5428745632')
-//           .set('Authorization', token)
-//           .send({
-//             status: 'active',
-//           })
-//           .end((err, res) => {
-//             res.should.have.status(403);
-//             res.body.should.have.property('status');
-//             res.body.should.have.property('error');
-//             res.body.error.should.equal('The endpoint you are requesting is forbidden');
-//             done();
-//           });
-//       });
-//   });
 
-//   it('should throw an error when an incorrect token is entered', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/auth/signin')
-//       .send({
-//         email: 'aishabd@gmail.com',
-//         password: 'password',
-//       })
-//       .end((error, response) => {
-//         const token = `Bearer ${response.body.data.token}`;
-//         chai.request(app)
-//           .patch('/api/v1/accounts/5428745632')
-//           .set('Authorization', tokennn)
-//           .send({
-//             status: 'dormant',
-//           })
-//           .end((err, res) => {
-//             res.should.have.status(401);
-//             res.body.should.have.property('status');
-//             res.body.should.have.property('error');
-//             res.body.error.should.equal('Authentication Failed');
-//             done();
-//           });
-//       });
-//   });
+describe('Activate and Deactivate account test', () => {
+  it('should throw a 403 error if user is not admin', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'temisan@gmail.com',
+        password: 'devcrush',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .patch('/api/v1/accounts/5428745632')
+          .set('Authorization', token)
+          .send({
+            status: 'active',
+          })
+          .end((err, res) => {
+            res.should.have.status(403);
+            res.body.should.have.property('status');
+            res.body.should.have.property('error');
+            res.body.error.should.equal('The endpoint you are requesting is forbidden');
+            done();
+          });
+      });
+  });
 
-//   it('should sucessfully change account status', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/auth/signin')
-//       .send({
-//         email: 'aishabd@gmail.com',
-//         password: 'password',
-//       })
-//       .end((error, response) => {
-//         const token = `Bearer ${response.body.data.token}`;
-//         chai.request(app)
-//           .patch('/api/v1/accounts/5428745632')
-//           .set('Authorization', token)
-//           .send({
-//             status: 'dormant',
-//           })
-//           .end((err, res) => {
-//             res.should.have.status(200);
-//             res.body.should.be.a('object');
-//             res.body.should.have.property('data');
-//             res.body.data.should.be.a('array');
-//             res.body.data[0].should.have.property('accountNumber');
-//             res.body.data[0].should.have.property('status');
-//             done();
-//           });
-//       });
-//   });
+  it('should sucessfully change account status', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'aishabd@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .patch('/api/v1/accounts/5428745632')
+          .set('Authorization', token)
+          .send({
+            status: 'dormant',
+          })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('array');
+            res.body.data[0].should.have.property('accountNumber');
+            res.body.data[0].should.have.property('status');
+            done();
+          });
+      });
+  });
 
-//   it('should not change account status if account number does not exist', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/auth/signin')
-//       .send({
-//         email: 'aishabd@gmail.com',
-//         password: 'password',
-//       })
-//       .end((error, response) => {
-//         const token = `Bearer ${response.body.data.token}`;
-//         chai.request(app)
-//           .patch('/api/v1/accounts/5428745632')
-//           .set('Authorization', token)
-//           .send({
-//             status: 'active',
-//           })
-//           .end((err, res) => {
-//             res.should.have.status(404);
-//             res.body.should.have.property('status');
-//             res.body.should.have.property('error');
-//             res.body.error.should.equal(`Account with account number ${accountNumber} does not exist`);
-//             done();
-//           });
-//       });
-//   });
+  it('should throw an error when token is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'aishabd@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .patch('/api/v1/accounts/5428745632')
+          .set('Authorization', '')
+          .send({
+            status: 'active',
+          })
+          .end((err, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('status');
+            res.body.should.have.property('error');
+            done();
+          });
+      });
+  });
+});
 
-//   it('should not change account status if token is empty', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/auth/signin')
-//       .send({
-//         email: 'aishabd@gmail.com',
-//         password: 'password',
-//       })
-//       .end((error, response) => {
-//         const token = `Bearer ${response.body.data.token}`;
-//         chai.request(app)
-//           .patch('/api/v1/accounts/5428745632')
-//           .set('Authorization')
-//           .send({
-//             status: 'active',
-//           })
-//           .end((err, res) => {
-//             res.should.have.status(400);
-//             res.body.should.have.property('status');
-//             res.body.should.have.property('error');
-//             done();
-//           });
-//       });
-//   });
-// });
+describe('delete account tests', () => {
+  it('should succesfully delete an account', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'aishabd@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .delete('/api/v1/accounts/5428745632')
+          .set('Authorization', token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status');
+            res.body.should.have.property('message');
+            done();
+          });
+      });
+  });
+});
+
+describe('delete account tests', () => {
+  it('should throw an error when accountNumber does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'aishabd@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .delete('/api/v1/accounts/5428451000')
+          .set('Authorization', token)
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.have.property('status');
+            res.body.should.have.property('error');
+            done();
+          });
+      });
+  });
+});
