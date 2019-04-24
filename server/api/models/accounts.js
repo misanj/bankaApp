@@ -33,6 +33,12 @@ class Account {
     const result = db.query(query, [accountNumber]);
     return result;
   }
+
+  find(accountNumber) {
+    const query = 'SELECT * FROM accounts WHERE account_number = $1;';
+    const result = db.query(query, [accountNumber]);
+    return result;
+  }
 }
 const account = new Account();
 export default account;

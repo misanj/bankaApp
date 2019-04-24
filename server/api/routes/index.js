@@ -6,7 +6,7 @@ import AcctController from '../controllers/acctController';
 import Verification from '../middlewares/verification';
 import { validateUser, signInuser } from '../middlewares/validation';
 import validateCreate from '../middlewares/acctvalidate';
-// import TransactionController from '../controllers/transactionCont';
+import TransactionController from '../controllers/transactionCont';
 
 const router = express.Router();
 
@@ -19,6 +19,6 @@ router.post('/auth/signin', signInuser, UserController.signIn);
 router.post('/accounts', validateCreate, Verification.user, AcctController.createAccount);
 router.patch('/accounts/:accountNumber', Verification.admin, AcctController.activateDeactivate);
 router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
-// router.post('/transactions/:accountNumber/credit', Verification.staff, TransactionController.creditAccount);
+router.post('/transactions/:accountNumber/credit', Verification.staff, TransactionController.creditAccount);
 // router.post('/transactions/:accountNumber/debit', Verification.staff, TransactionController.debitAccount);
 export default router;

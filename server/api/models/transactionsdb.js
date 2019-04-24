@@ -1,43 +1,28 @@
-const transactions = [
-  {
-    id: 1,
-    createdOn: new Date(),
-    type: 'Credit', // credit or debit
-    accountNumber: 4530797010,
-    cashier: 2, // cashier who consummated the transaction
-    amount: 2000.00,
-    oldbalance: 0.1001,
-    newBalance: 550.65,
-  },
-  {
-    id: 2,
-    createdOn: new Date(),
-    type: 'Credit', // credit or debit
-    accountNumber: 2986431920,
-    cashier: 2, // cashier who consummated the transaction
-    amount: 100.00,
-    oldbalance: 0.1001,
-    newBalance: 420.65,
-  },
-  {
-    id: 3,
-    createdOn: new Date(),
-    type: 'Credit', // credit or debit
-    accountNumber: 2076648895,
-    cashier: 2, // cashier who consummated the transaction
-    amount: 4555.00,
-    oldbalance: 17500.65,
-    newBalance: 22055.65,
-  },
-  {
-    id: 4,
-    createdOn: new Date(),
-    type: 'Credit', // credit or debit
-    accountNumber: 29864312021,
-    cashier: 2, // cashier who consummated the transaction
-    amount: 340.00,
-    oldbalance: 210.65,
-    newBalance: 550.65,
-  }];
+/* eslint-disable class-methods-use-this */
+import moment from 'moment';
+import db from '../database/db';
 
+class Transactions {
+  createCredit(req, account, type) {
+    const queryText = `INSERT INTO transactions("createdOn", type,
+      account_number, cashier, amount, "old_balance", "new_balance") 
+      VALUES($1, $2, $3, $4, $5, $6, $7) 
+      RETURNING id, "account_number", amount, cashier, type, "new_balance";`;
+    const accountNumber = parseInt(req.params.accountNumber, 10);
+    const newBalance = Transactions.balance(account.balance, req.body.amount, type);
+    const values = [
+      moment(new Date()),
+      type,
+      accountNumber,
+      req.user.id,
+      parseFloat(req.body.amount),
+      account.balance,
+      newBalance,
+    ];
+
+    const results = db.query(queryText, values);
+    return results;
+  }
+}
+const transactions = new Transactions();
 export default transactions;
