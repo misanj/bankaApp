@@ -11,7 +11,8 @@
     "heroku-postbuild": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "clean-db": "set DEBUG= dev && babel-node server/api/database/dropTables && babel-node server/api/database/createTables.js && babel-node server/api/database/seed.js"
+    "clean-db": "set DEBUG= dev && babel-node server/api/database/dropTables && babel-node server/api/database/createTables.js && babel-node server/api/database/seed.js",
+    "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
