@@ -33,6 +33,25 @@ class Account {
     const result = db.query(query, [accountNumber]);
     return result;
   }
+
+  /**
+  * @method updateBalance
+  * @description Updates the account balance
+  * @param {*} accountNumber - The accountNumber
+  * @param{*} balance - The  new balance of the account
+  * @returns {object} the account details
+  */
+  updateBalance(accountNumber, balance) {
+    const query = 'UPDATE accounts SET balance = $1 WHERE account_number = $2 RETURNING *;';
+    const result = db.query(query, [balance, accountNumber]);
+    return result;
+  }
+
+  find(accountNumber) {
+    const query = 'SELECT * FROM accounts WHERE account_number = $1;';
+    const result = db.query(query, [accountNumber]);
+    return result;
+  }
 }
 const account = new Account();
 export default account;
