@@ -8,14 +8,14 @@ import db from '../database/db';
  */
 class Transactions {
   /**
-    * @method createCredit
-    * @description Adds a credit transaction to the database
+    * @method creDeb
+    * @description Adds transaction to the database
     * @param {object} req - The Request Object
     * @param {object} account - An object containing the account details
     * @param {string} type - A string representing the type of transaction i.e credit
     * @returns {object} JSON API Response
     */
-  createCredit(req, account, type) {
+  creDeb(req, account, type) {
     const queryText = `INSERT INTO transactions("createdon", type,
       account_number, cashier, amount, "old_balance", "new_balance") 
       VALUES($1, $2, $3, $4, $5, $6, $7) 

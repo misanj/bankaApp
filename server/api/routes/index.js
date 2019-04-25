@@ -20,5 +20,5 @@ router.post('/accounts', validateUser.accountCreate, validate, Verification.user
 router.patch('/accounts/:accountNumber', validateUser.accountStatus, validate, Verification.admin, AcctController.activateDeactivate);
 router.delete('/accounts/:accountNumber', Verification.admin, AcctController.deleteAccount);
 router.post('/transactions/:accountNumber/credit', validateUser.transactionsCre, validate, Verification.staff, TransactionController.creditAccount);
-// router.post('/transactions/:accountNumber/debit', Verification.staff, TransactionController.debitAccount);
+router.post('/transactions/:accountNumber/debit', validateUser.transactionsCre, validate, Verification.staff, TransactionController.debitAccount);
 export default router;

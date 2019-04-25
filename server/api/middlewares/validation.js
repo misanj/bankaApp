@@ -28,6 +28,7 @@ const accountStatus = [
 const transactionsCre = [
   check('amount').not().isEmpty().withMessage('Amount should not be left empty'),
   check('amount').isNumeric().trim().withMessage('Amount must be Numeric'),
+  // check('token').isAlphanumeric().trim().withMessage('Please Insert Your Token'),
 ];
 
 const validateUser = {
