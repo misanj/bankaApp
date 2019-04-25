@@ -22,7 +22,7 @@ const queryText = `
   INSERT INTO transactions(createdon, type, account_number, cashier, amount, old_balance, new_balance) 
   VALUES('${moment(new Date())}', 'credit', 1758964523, 2, 25000.00, 800000.58, 825000.58),
         ('${moment(new Date())}', 'credit', 7596841530, 2, 300000.00, 50000.56, 350000.56),
-        ('${moment(new Date())}', 'credit', 5823642528, 2, 0.00, 50000.00, 50000.00),
+        ('${moment(new Date())}', 'credit', 5823642528, 2, 50000.00, 0.00, 50000.00),
         ('${moment(new Date())}', 'debit', 8745521633, 2, 35000.00, 200000.00, 165000.00),
         ('${moment(new Date())}', 'debit', 5428745632, 2, 1500.00, 40000.35, 38500.35);
 `;
