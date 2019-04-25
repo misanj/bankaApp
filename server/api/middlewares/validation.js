@@ -16,14 +16,16 @@ const signIn = [
   check('password').not().isEmpty().withMessage('Input password'),
 ];
 
-const account = [
+const accountCreate = [
   check('type').not().isEmpty().withMessage('Type should not be left empty'),
   check('type').isAlpha().trim().withMessage('Type can only contain letters'),
+];
+
+const accountStatus = [
   check('status').not().isEmpty().withMessage('Status should not be left empty'),
   check('status').isAlpha().trim().withMessage('Status can only contain letters'),
 ];
-
-const transactions = [
+const transactionsCre = [
   check('amount').not().isEmpty().withMessage('Amount should not be left empty'),
   check('amount').isNumeric().trim().withMessage('Amount must be Numeric'),
 ];
@@ -31,7 +33,8 @@ const transactions = [
 const validateUser = {
   signUp,
   signIn,
-  account,
-  transactions,
+  accountCreate,
+  accountStatus,
+  transactionsCre,
 };
 export default validateUser;

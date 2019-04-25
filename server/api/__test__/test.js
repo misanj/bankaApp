@@ -538,7 +538,7 @@ describe('Transactions Tests', () => {
           .post('/api/v1/transactions/8745521633/credit')
           .set('Authorization', '')
           .send({
-            status: 'active',
+            amount: 5000,
           })
           .end((err, res) => {
             res.should.have.status(401);
