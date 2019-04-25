@@ -468,3 +468,84 @@ describe('delete account tests', () => {
       });
   });
 });
+
+describe('Transactions Tests', () => {
+  it('should successfully credit user account', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'dassyakolo@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .post('/api/v1/transactions/8745521633/credit')
+          .set('Authorization', token)
+          .send({
+            amount: 5000,
+          })
+          .end((err, res) => {
+            res.should.have.status(201);
+            res.body.should.be.a('object');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('array');
+            res.body.data[0].should.have.property('transactionId');
+            res.body.data[0].should.have.property('accountNumber');
+            res.body.data[0].should.have.property('amount');
+            res.body.data[0].should.have.property('cashier');
+            res.body.data[0].should.have.property('transactionType');
+            res.body.data[0].should.have.property('accountBalance');
+            done();
+          });
+      });
+  });
+
+  it('should throw an error if an incorrect account number is entered', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'dassyakolo@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .post('/api/v1/transactions/8745521655/credit')
+          .set('Authorization', token)
+          .send({
+            amount: 5000,
+          })
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.have.property('status');
+            res.body.should.have.property('error');
+            done();
+          });
+      });
+  });
+
+  it('should throw an error when token is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'dassyakolo@gmail.com',
+        password: 'password',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .post('/api/v1/transactions/8745521633/credit')
+          .set('Authorization', '')
+          .send({
+            status: 'active',
+          })
+          .end((err, res) => {
+            res.should.have.status(401);
+            res.body.should.have.property('status');
+            res.body.should.have.property('error');
+            done();
+          });
+      });
+  });
+});

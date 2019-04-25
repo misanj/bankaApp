@@ -17,7 +17,7 @@ app.get('/', (req, res) => res.status(200).json({ message: 'Welcome to banka api
 app.use('/api/v1', router);
 
 // Error handling
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.status(404).json({
     msg: 'Sorry!!, the page you are looking for cannot be found',
   });
