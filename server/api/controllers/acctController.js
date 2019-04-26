@@ -87,10 +87,10 @@ class AccountController {
     try {
       const accountNumber = parseInt(req.params.accountNumber, 10);
       const result = await accounts.delete(accountNumber);
-      if (!result.rows[0]) {
+      if (result.rowCount < 1) {
         return res.status(404).json({
           status: res.statusCode,
-          error: `Account with account number ${accountNumber} does not exist`,
+          error: `Account number ${accountNumber} does not exist`,
         });
       }
       return res.status(200).json({
