@@ -1,5 +1,17 @@
 /* eslint-disable class-methods-use-this */
+/**
+ * @class AcctNumber
+ * @description Generates random account number
+ * @export AcctNumber
+ */
+
 class AcctNumber {
+  /**
+  * @method generateAcctNum
+  * @description Generates random account number
+  * @returns {integer} The generated account number
+  */
+
   generateAcctNum() {
     let numString = '';
 
@@ -10,6 +22,4 @@ class AcctNumber {
   }
 }
 
-const acctNumber = new AcctNumber();
-
-export default acctNumber;
+export default new AcctNumber();

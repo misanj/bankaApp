@@ -3,7 +3,21 @@ import moment from 'moment';
 import AcctNumber from '../utils/accountNumber';
 import db from '../database/db';
 
+/**
+ * @class account
+ * @description Contains controller methods for each transaction related endpoint
+ * @export Account
+ */
+
 class Account {
+  /**
+  * @method create
+  * @description Adds user account to data base
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+
   create(data, req) {
     const queryText = `INSERT INTO accounts(account_number, createdon, client_id,
         type) 
@@ -21,12 +35,27 @@ class Account {
     return result;
   }
 
+  /**
+    * @method updateAcctStatus
+    * @description Updates User account status in the database
+    * @param { * } accountNumber - The Account Number
+    * @param { * } status - The Status of the Account
+    * @returns {object} The account details
+    */
+
   async updateAcctStatus(accountNumber, status) {
     const query = 'UPDATE accounts SET status = $1 WHERE account_number = $2 RETURNING *;';
 
     const result = db.query(query, [status, accountNumber]);
     return result;
   }
+
+  /**
+    * @method delete
+    * @description Deletes an account
+    * @param { * } accountNumber - The Request Object
+    * @returns {object} JSON API Response
+    */
 
   delete(accountNumber) {
     const query = 'DELETE FROM accounts WHERE "account_number" = $1';
@@ -36,9 +65,9 @@ class Account {
 
   /**
   * @method updateBalance
-  * @description Updates the account balance
+  * @description Updates account balance
   * @param {*} accountNumber - The accountNumber
-  * @param{*} balance - The  new balance of the account
+  * @param {*} balance - The  new balance of the account
   * @returns {object} the account details
   */
   updateBalance(accountNumber, balance) {
@@ -47,11 +76,17 @@ class Account {
     return result;
   }
 
+  /**
+  * @method find
+  * @description Finds and returns account details
+  * @param {*} accountNumber - The accountNumber
+  * @returns {object} the account details
+  */
+
   find(accountNumber) {
     const query = 'SELECT * FROM accounts WHERE account_number = $1;';
     const result = db.query(query, [accountNumber]);
     return result;
   }
 }
-const account = new Account();
-export default account;
+export default new Account();

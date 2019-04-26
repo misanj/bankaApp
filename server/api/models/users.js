@@ -26,6 +26,10 @@ class User {
     return result;
   }
 
+  /**
+   * @param {*} data
+   * @returns { object } user object
+   */
   // eslint-disable-next-line class-methods-use-this
   find(email) {
     const query = 'SELECT * FROM users WHERE email=$1';

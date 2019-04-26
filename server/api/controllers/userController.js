@@ -2,7 +2,20 @@
 import users from '../models/users';
 import Auth from '../utils/authenticate';
 
+/**
+ * @class UserController
+ * @description Contains controller methods for each user related endpoint
+ * @export UserController
+ */
+
 class UserController {
+  /**
+  * @method signUp
+  * @description Sign's up users
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
   async signUp(req, res) {
     try {
       const result = await users.create(req.body);
@@ -33,6 +46,14 @@ class UserController {
     }
   }
 
+  /**
+  * @method signIn
+  * @description Sign's in users
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+
   async signIn(req, res) {
     const {
       email,
@@ -41,14 +62,14 @@ class UserController {
 
     const result = await users.find(email);
 
-    if (result.rows < 1 || !Auth.verifyPassword(password, result.rows[0].password)) {
+    if (!result.rows[0] || !Auth.verifyPassword(password, result.rows[0].password)) {
       return res.status(401).json({
         status: res.statusCode,
         error: 'Authentication Error',
       });
     }
 
-    const user = { ...result.rows[0] };
+    const user = result.rows[0];
     const token = Auth.generateToken(user);
 
     return res.status(200).json({
@@ -63,5 +84,4 @@ class UserController {
     });
   }
 }
-const userController = new UserController();
-export default userController;
+export default new UserController();
