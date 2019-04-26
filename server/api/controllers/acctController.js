@@ -2,7 +2,21 @@
 /* eslint-disable class-methods-use-this */
 import accounts from '../models/accounts';
 
-class AcctController {
+/**
+ * @class TransactionController
+ * @description Contains controller methods for account related endpoint
+ * @export AccountController
+ */
+
+class AccountController {
+  /**
+  * @method createAccount
+  * @description Creates a user's bank account and adds it to the databse
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+
   async createAccount(req, res) {
     try {
       const { rows } = await accounts.create(req.body.type, req);
@@ -25,11 +39,19 @@ class AcctController {
     }
   }
 
+  /**
+  * @method activateDeactivate
+  * @description Activates or Deactivate users account in the database
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+
   async activateDeactivate(req, res) {
     try {
       const accountNumber = parseInt(req.params.accountNumber, 10);
       const result = await accounts.updateAcctStatus(accountNumber, req.body.status);
-      if (result.rowCount < 1) {
+      if (!result.rows[0]) {
         return res.status(404).json({
           status: res.statusCode,
           error: `Account with account number ${accountNumber} does not exist`,
@@ -52,6 +74,15 @@ class AcctController {
     }
   }
 
+  /**
+  * @method deleteAccount
+  * @description Deletes user account in the databsae
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+
+
   async deleteAccount(req, res) {
     try {
       const accountNumber = parseInt(req.params.accountNumber, 10);
@@ -59,12 +90,12 @@ class AcctController {
       if (result.rowCount < 1) {
         return res.status(404).json({
           status: res.statusCode,
-          error: `Account with account number ${accountNumber} does not exist`,
+          error: `Account number ${accountNumber} does not exist`,
         });
       }
       return res.status(200).json({
         status: res.statusCode,
-        message: 'Account successfully deleted',
+        message: 'Account deleted sucessfully',
       });
     } catch (error) {
       return res.status(400).json({
@@ -74,5 +105,4 @@ class AcctController {
     }
   }
 }
-const accountController = new AcctController();
-export default accountController;
+export default new AccountController();
