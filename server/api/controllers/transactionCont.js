@@ -51,7 +51,7 @@ class TransactionController {
   }
 
   /**
-  *  @method creditAccount
+  *  @method debitAccount
   * @description Credits a user's bank account
   * @param {object} req - The Request Object
   * @param {object} res - The Response Object

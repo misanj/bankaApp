@@ -7,7 +7,7 @@ import router from './api/routes/index';
 const log = debug('dev');
 const app = express();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5200;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

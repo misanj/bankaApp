@@ -20,7 +20,6 @@ class UserController {
     try {
       const result = await users.create(req.body);
       const user = result.rows[0];
-      //
       const token = Auth.generateToken({ id: user.id, email: user.email });
       return res.status(201).json({
         status: res.statusCode,
@@ -33,6 +32,7 @@ class UserController {
         }],
       });
     } catch (error) {
+      console.log(error);
       if (error.routine === '_bt_check_unique') {
         return res.status(422).json({
           status: res.statusCode,

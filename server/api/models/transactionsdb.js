@@ -3,8 +3,8 @@ import moment from 'moment';
 import db from '../database/db';
 
 /**
- * @exports Transaction
- * @class Transaction
+ * @export Transactions
+ * @class Transactions
  */
 class Transactions {
   /**
@@ -37,11 +37,25 @@ class Transactions {
   }
 
   /**
+    * @method getTransactions
+    * @description fetches all account transaction on a particular account
+    * @param {object} accountNumber - An object containing the account details
+    * @returns {object} JSON API Response
+    */
+  getTransactions(accountNumber) {
+    const queryText = `SELECT transactions.id AS "transactionId", transactions.createdon, transactions.type,
+    transactions.account_number, transactions.amount, transactions.old_balance,
+    transactions.new_balance FROM transactions WHERE account_number=$1`;
+    const result = db.query(queryText, [accountNumber]);
+    return result;
+  }
+
+  /**
   * @method getBalance
   * @param {object} accountBalance - The previous account balance
   * @param {object} amount - The transaction amount
   * @param {string} type - A string representing the type of transaction
-  * @returns {object} JSON API Response
+  * @returns {object} JSON API Result
   */
   static getBalance(accountBalance, amount, type) {
     const credit = parseFloat((parseFloat(accountBalance) + parseFloat(amount)).toFixed(2));

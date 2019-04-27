@@ -630,3 +630,34 @@ describe('Transactions Tests Debit', () => {
       });
   });
 });
+
+// describe('GET Transactions history Tests Debit', () => {
+//   it('should successfully display user account transaction history', (done) => {
+//     chai.request(app)
+//       .post('/api/v1/auth/signin')
+//       .send({
+//         email: 'temisan@gmail.com',
+//         password: 'devcrush',
+//       })
+//       .end((error, response) => {
+//         const token = `Bearer ${response.body.data[0].token}`;
+//         chai.request(app)
+//           .get('/api/v1/accounts/8745521633/transactions')
+//           .set('Authorization', token)
+//           .end((err, res) => {
+//             res.should.have.status(200);
+//             res.body.should.be.a('object');
+//             res.body.should.have.property('data');
+//             res.body.data.should.be.a('array');
+//             res.body.data[0].should.have.property('transactionId');
+//             res.body.data[0].should.have.property('createdon');
+//             res.body.data[0].should.have.property('type');
+//             res.body.data[0].should.have.property('account_number');
+//             res.body.data[0].should.have.property('amount');
+//             res.body.data[0].should.have.property('old_balance');
+//             res.body.data[0].should.have.property('new_balance');
+//             done();
+//           });
+//       });
+//   });
+// });
