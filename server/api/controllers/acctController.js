@@ -1,9 +1,9 @@
 
 /* eslint-disable class-methods-use-this */
 import accounts from '../models/accounts';
-
+import Transactions from '../models/transactionsdb';
 /**
- * @class TransactionController
+ * @class AccountController
  * @description Contains controller methods for account related endpoint
  * @export AccountController
  */
@@ -82,7 +82,6 @@ class AccountController {
   * @returns {object} JSON API Response
   */
 
-
   async deleteAccount(req, res) {
     try {
       const accountNumber = parseInt(req.params.accountNumber, 10);
@@ -98,6 +97,34 @@ class AccountController {
         message: 'Account deleted sucessfully',
       });
     } catch (error) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: error.detail,
+      });
+    }
+  }
+  
+  /**
+  * @method viewTransactions
+  * @description Fetches user account transaction history from the databsae
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+  async viewTransactions(req, res) {
+    try{
+      const accountNumber = parseInt(req.params.accountNumber, 10);
+      const result = await Transactions.getTransactions(accountNumber);
+      if(result.rowCount < 1) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: `This account ${accountNumber} does not have any transactions yet`,
+        });
+      }return res.status(200).json({
+        status: res.statusCode,
+        data: [result.rows],
+      });
+    }catch (error) {
       return res.status(400).json({
         status: res.statusCode,
         error: error.detail,
