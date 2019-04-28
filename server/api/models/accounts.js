@@ -103,5 +103,18 @@ class Account {
     const result = await db.query(queryText, values);
     return result;
   }
+
+  /**
+  * @method getAccounts
+  * @description Fetches account user account details from database
+  * @returns {object} API JSON Response
+  */
+ async getAccounts () {
+  const queryText = `SELECT accounts.createdon, accounts.account_number,
+  users.email, accounts.type, accounts.status, 
+  accounts.balance FROM users JOIN accounts on users.id = accounts.client_id`;
+  const result = await db.query(queryText);
+  return result;
+  }
 }
 export default new Account();

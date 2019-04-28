@@ -188,5 +188,27 @@ class AccountController {
     }
   }
 
+  /**
+  * @method viewAllAccounts
+  * @description Fetches all user account details from the database
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+ async viewAllAccounts(req, res) {
+  try{
+    const result = await accounts.getAccounts();
+    return res.status(200).json({
+      status: res.statusCode,
+      data: result.rows,
+    });
+  }catch (error) {
+    return res.status(400).json({
+      status: res.statusCode,
+      error: error.detail,
+    });
+  }
+}
+
 }
 export default new AccountController();
