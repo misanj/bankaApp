@@ -51,6 +51,21 @@ class Transactions {
   }
 
   /**
+    * @method getAtransac
+    * @description fetches a specific transaction using the transaction Id
+    * @param {object} req - The request object
+    * @returns {object} JSON API Response
+    */
+  async getAtransac(req) {
+    const queryText = `SELECT transactions.id AS "transactionId", transactions.createdon, transactions.type,
+    transactions.account_number, transactions.amount, transactions.old_balance,
+    transactions.new_balance FROM transactions WHERE id=$1`;
+        const values = [req.params.id];
+    const result = await db.query(queryText, values);
+    return result;
+  }
+
+  /**
   * @method getBalance
   * @param {object} accountBalance - The previous account balance
   * @param {object} amount - The transaction amount
