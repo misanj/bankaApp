@@ -118,6 +118,21 @@ class Account {
   }
 
   /**
+  * @method getByEmail
+  * @description Fetches specific user account details from database
+  * @returns {object} API JSON Response
+  */
+ async getByEmail (email) {
+  const queryText = `SELECT accounts.createdon, accounts.account_number,
+  users.email, accounts.type, accounts.status, 
+  accounts.balance FROM users JOIN accounts on users.id = accounts.client_id
+  WHERE users.email=$1;`;
+  const result = await db.query(queryText, [email]);
+  return result;
+  }
+
+
+  /**
   * @method getByStatus
   * @description Fetches all active or dormant accountsfrom database
   * @param {*} status - The account status. active or dormant
