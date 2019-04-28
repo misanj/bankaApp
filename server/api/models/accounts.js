@@ -88,5 +88,20 @@ class Account {
     const result = db.query(query, [accountNumber]);
     return result;
   }
+
+  /**
+  * @method getDetails
+  * @description Fetches account user account details from database
+  * @param {*} req - The Request object
+  * @returns {object} API JSON Response
+  */
+  async getDetails(req) {
+    const queryText = `SELECT accounts.createdon, accounts.account_number,
+    users.email, accounts.type, accounts.status, 
+    accounts.balance FROM users JOIN accounts on users.id = accounts.client_id WHERE account_number = $1;`;
+        const values = [req.params.accountNumber];
+    const result = await db.query(queryText, values);
+    return result;
+  }
 }
 export default new Account();
