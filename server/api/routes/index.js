@@ -24,5 +24,6 @@ router.post('/transactions/:accountNumber/credit', validateUser.transactionsCre,
 router.post('/transactions/:accountNumber/debit', validateUser.transactionsCre,
   validate, Verification.staff, TransactionController.debitAccount);
 router.get('/accounts/:accountNumber/transactions', Verification.user, AccountController.viewTransactions);
-router.get('/transactions/:id', Verification.user, AccountController.viewOne);  
+router.get('/transactions/:id', Verification.user, AccountController.viewOne); 
+router.get('/accounts/:accountNumber', Verification.user, AccountController.viewAcctDetails); 
 export default router;

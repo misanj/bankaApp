@@ -143,7 +143,6 @@ class AccountController {
     try{
       const id = parseInt(req.params.id);
       const result = await Transactions.getAtransac(req);
-      console.log(result);
       if(result.rowCount < 1) {
         return res.status(404).json({
           status: res.statusCode,
@@ -154,12 +153,40 @@ class AccountController {
         data: result.rows[0],
       });
     }catch (error) {
-      console.log('ghhhh'+ error);
       return res.status(400).json({
         status: res.statusCode,
         error: error.detail,
       });
     }
   }
+
+  /**
+  * @method viewAcctDetails
+  * @description Fetches user account details from the database
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+  async viewAcctDetails(req, res) {
+    try{
+      const accountNumber = parseInt(req.params.accountNumber);
+      const result = await accounts.getDetails(req);
+      if(result.rowCount < 1) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: `This account ${accountNumber} does not exist`,
+        });
+      }return res.status(200).json({
+        status: res.statusCode,
+        data: result.rows[0],
+      });
+    }catch (error) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: error.detail,
+      });
+    }
+  }
+
 }
 export default new AccountController();
