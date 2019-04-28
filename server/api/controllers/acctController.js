@@ -190,13 +190,20 @@ class AccountController {
 
   /**
   * @method viewAllAccounts
-  * @description Fetches all user account details from the database
+  * @description Fetches all accounts, acitive and dormant accounts from the database
   * @param {object} req - The Request Object
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
   */
  async viewAllAccounts(req, res) {
   try{
+    if (req.query.status !== '') {
+      const result = await accounts.getByStatus(req.query.status);
+      return res.status(200).json({
+        status: res.statusCode,
+        data: result.rows,
+      });
+    }
     const result = await accounts.getAccounts();
     return res.status(200).json({
       status: res.statusCode,

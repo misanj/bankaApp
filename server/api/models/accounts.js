@@ -116,5 +116,20 @@ class Account {
   const result = await db.query(queryText);
   return result;
   }
+
+  /**
+  * @method getByStatus
+  * @description Fetches all active or dormant accountsfrom database
+  * @param {*} status - The account status. active or dormant
+  * @returns {object} API JSON Response
+  */
+ async getByStatus (status) {
+    const queryText = `SELECT accounts.createdon, accounts.account_number,
+    users.email, accounts.type, accounts.status, 
+    accounts.balance FROM users JOIN accounts on users.id = accounts.client_id
+    WHERE accounts.status = $1`;
+    const result = await db.query(queryText,[status]);
+    return result;
+  }
 }
 export default new Account();
