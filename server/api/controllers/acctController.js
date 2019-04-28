@@ -118,11 +118,11 @@ class AccountController {
       if(result.rowCount < 1) {
         return res.status(404).json({
           status: res.statusCode,
-          error: `This account ${accountNumber} does not have any transactions yet`,
+          error: `The account ${accountNumber} does not have any transactions yet`,
         });
       }return res.status(200).json({
         status: res.statusCode,
-        data: [result.rows],
+        data: result.rows,
       });
     }catch (error) {
       return res.status(400).json({
@@ -187,6 +187,36 @@ class AccountController {
       });
     }
   }
+
+  /**
+  * @method viewAcctBYEmail
+  * @description Fetches all accounts owned by a specific from the databsae
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+ async viewAcctBYEmail(req, res) {
+  try{
+    const email = req.params.email;
+    const result = await accounts.getByEmail(email);
+    if(result.rowCount < 1) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: `The email ${email} does not exist or its incorrect`,
+      });
+    }return res.status(200).json({
+      status: res.statusCode,
+      data: result.rows,
+    });
+  }catch (error) {
+    console.log('dddddd' + error);
+    return res.status(400).json({
+      status: res.statusCode,
+      error: error.detail,
+    });
+  }
+}
+
 
   /**
   * @method viewAllAccounts
