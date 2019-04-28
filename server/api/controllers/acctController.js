@@ -106,7 +106,7 @@ class AccountController {
   
   /**
   * @method viewTransactions
-  * @description Fetches user account transaction history from the databsae
+  * @description Fetches all user account transaction history from the databsae
   * @param {object} req - The Request Object
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
@@ -125,6 +125,36 @@ class AccountController {
         data: [result.rows],
       });
     }catch (error) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: error.detail,
+      });
+    }
+  }
+
+  /**
+  * @method viewOne
+  * @description Fetches user account transaction history for a particular transaction
+  * @param {object} req - The Request Object
+  * @param {object} res - The Response Object
+  * @returns {object} JSON API Response
+  */
+  async viewOne(req, res) {
+    try{
+      const id = parseInt(req.params.id);
+      const result = await Transactions.getAtransac(req);
+      console.log(result);
+      if(result.rowCount < 1) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: `This account ${id} does not have any transactions yet`,
+        });
+      }return res.status(200).json({
+        status: res.statusCode,
+        data: result.rows[0],
+      });
+    }catch (error) {
+      console.log('ghhhh'+ error);
       return res.status(400).json({
         status: res.statusCode,
         error: error.detail,
