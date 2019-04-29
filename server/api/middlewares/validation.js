@@ -1,4 +1,4 @@
-import { check } from 'express-validator/check';
+import { check, param } from 'express-validator/check';
 
 const signUp = [
   check('firstName').not().isEmpty().withMessage('First Name should not be left empty'),
@@ -31,11 +31,28 @@ const transactionsCre = [
   // check('token').isAlphanumeric().trim().withMessage('Please Insert Your Token'),
 ];
 
+const accountNumber = [
+  param('accountNumber').not().isEmpty().withMessage('accountNumber must not be empty'),
+  param('accountNumber').isNumeric().trim().withMessage('accountNumber can only be numeric'),
+];
+const identity = [
+  param('id').not().isEmpty().withMessage('id must not be empty'),
+  param('id').isNumeric().trim().withMessage('id can only be numeric'),
+];
+
+const emailAdd = [
+  param('email').not().isEmpty().withMessage('email must not be empty'),
+  param('email').isEmail().trim().withMessage('email must be a valid one'),
+];
+
 const validateUser = {
   signUp,
   signIn,
   accountCreate,
   accountStatus,
   transactionsCre,
+  accountNumber,
+  identity,
+  emailAdd,
 };
 export default validateUser;

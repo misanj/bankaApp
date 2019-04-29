@@ -14,8 +14,8 @@ describe('user sign up tests', () => {
       .post('/api/v1/auth/signup')
       .send({
         firstName: '',
-        lastName: 'otokuefor',
-        email: 'temisan@gmail.com',
+        lastName: 'benny',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -29,9 +29,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: '23evid',
-        lastName: 'otokuefor',
-        email: 'temisan@gmail.com',
+        firstName: '65nis',
+        lastName: 'benny',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -46,9 +46,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisan',
+        firstName: 'diva',
         lastName: '',
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -62,9 +62,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisan',
-        lastName: '23evid',
-        email: 'temisan@gmail.com',
+        firstName: 'diva',
+        lastName: '25dids',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -78,8 +78,8 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisa',
-        lastName: 'otokuefor',
+        firstName: 'diva',
+        lastName: 'benny',
         email: '',
         password: 'devcrush',
       })
@@ -94,9 +94,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
-        email: 'temisan@gm',
+        firstName: 'diva',
+        lastName: 'benny',
+        email: 'benny@gm',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -110,9 +110,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
-        email: 'temisan@gmail.com',
+        firstName: 'diva',
+        lastName: 'benny',
+        email: 'benny@gmail.com',
         password: '',
       })
       .end((err, res) => {
@@ -126,9 +126,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
-        email: 'temisan@gmail.com',
+        firstName: 'diva',
+        lastName: 'benny',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -149,9 +149,9 @@ describe('user sign up tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
-        email: 'temisan@gmail.com',
+        firstName: 'diva',
+        lastName: 'benny',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -169,8 +169,6 @@ describe('user sign in tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
         email: '',
         password: 'devcrush',
       })
@@ -185,9 +183,7 @@ describe('user sign in tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
-        email: 'temisannn@gmail.com',
+        email: 'benny@com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -201,9 +197,7 @@ describe('user sign in tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        firstName: 'temisan',
-        lastName: 'otokuefor',
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: '',
       })
       .end((err, res) => {
@@ -217,7 +211,7 @@ describe('user sign in tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((err, res) => {
@@ -270,7 +264,7 @@ describe('create account tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((error, response) => {
@@ -293,7 +287,7 @@ describe('create account tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((error, response) => {
@@ -316,7 +310,7 @@ describe('create account tests', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((error, response) => {
@@ -349,7 +343,7 @@ describe('Activate and Deactivate account test', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'temisan@gmail.com',
+        email: 'benny@gmail.com',
         password: 'devcrush',
       })
       .end((error, response) => {
@@ -631,33 +625,33 @@ describe('Transactions Tests Debit', () => {
   });
 });
 
-// describe('GET Transactions history Tests Debit', () => {
-//   it('should successfully display user account transaction history', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/auth/signin')
-//       .send({
-//         email: 'temisan@gmail.com',
-//         password: 'devcrush',
-//       })
-//       .end((error, response) => {
-//         const token = `Bearer ${response.body.data[0].token}`;
-//         chai.request(app)
-//           .get('/api/v1/accounts/8745521633/transactions')
-//           .set('Authorization', token)
-//           .end((err, res) => {
-//             res.should.have.status(200);
-//             res.body.should.be.a('object');
-//             res.body.should.have.property('data');
-//             res.body.data.should.be.a('array');
-//             res.body.data[0].should.have.property('transactionId');
-//             res.body.data[0].should.have.property('createdon');
-//             res.body.data[0].should.have.property('type');
-//             res.body.data[0].should.have.property('account_number');
-//             res.body.data[0].should.have.property('amount');
-//             res.body.data[0].should.have.property('old_balance');
-//             res.body.data[0].should.have.property('new_balance');
-//             done();
-//           });
-//       });
-//   });
-// });
+describe('GET Transactions history Tests Debit', () => {
+  it('should successfully display user account transaction history', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'benny@gmail.com',
+        password: 'devcrush',
+      })
+      .end((error, response) => {
+        const token = `Bearer ${response.body.data[0].token}`;
+        chai.request(app)
+          .get('/api/v1/accounts/8745521633/transactions')
+          .set('Authorization', token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('array');
+            res.body.data[0].should.have.property('transactionId');
+            res.body.data[0].should.have.property('createdon');
+            res.body.data[0].should.have.property('type');
+            res.body.data[0].should.have.property('account_number');
+            res.body.data[0].should.have.property('amount');
+            res.body.data[0].should.have.property('old_balance');
+            res.body.data[0].should.have.property('new_balance');
+            done();
+          });
+      });
+  });
+});
