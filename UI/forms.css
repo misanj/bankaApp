@@ -6,7 +6,7 @@
     }
     
     body {
-        background: url(img/bg.png);
+        background: var(--dark);
         background-size: cover;
         background-position: center;
     }
@@ -15,6 +15,7 @@
         margin: auto;
         padding: 10rem;
         width: 50%;
+        background: var(--dark);
     }
     
     
