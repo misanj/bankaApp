@@ -5,13 +5,10 @@ import debug from 'debug';
 const log = debug('dev');
 
 dotenv.config();
-let connectionString = process.env.DATABASE_URL;
-// if (NODE_ENV = production){
-//   connectionString = process.env.DATABASE_URL;
-// }else if(NODE_ENV = test){
-//   connectionString = process.env.DATABASE_development;
-// }else{
-//   connectionString = process.env.DATABASE_URL;
+
+const connectionString = process.env.DATABASE_URL;
+// if (process.env.ENV_DEVELOPMENT){
+//    connectionString = process.env.DEVELOPMENT_URL;
 // }
 
 const pool = new Pool({
